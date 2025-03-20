@@ -4,6 +4,8 @@ import jinviz.share_depot_be.dto.LikeDTOs;
 import jinviz.share_depot_be.entity.Like;
 import jinviz.share_depot_be.entity.Post;
 import jinviz.share_depot_be.entity.User;
+import jinviz.share_depot_be.exception.CustomException;
+import jinviz.share_depot_be.exception.ErrorCode;
 import jinviz.share_depot_be.repository.LikeRepository;
 import jinviz.share_depot_be.repository.PostRepository;
 import jinviz.share_depot_be.repository.UserRepository;

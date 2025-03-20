@@ -3,6 +3,8 @@ package jinviz.share_depot_be.service;
 import jinviz.share_depot_be.dto.PostDTOs;
 import jinviz.share_depot_be.entity.Post;
 import jinviz.share_depot_be.entity.User;
+import jinviz.share_depot_be.exception.CustomException;
+import jinviz.share_depot_be.exception.ErrorCode;
 import jinviz.share_depot_be.repository.CommentRepository;
 import jinviz.share_depot_be.repository.LikeRepository;
 import jinviz.share_depot_be.repository.PostRepository;
