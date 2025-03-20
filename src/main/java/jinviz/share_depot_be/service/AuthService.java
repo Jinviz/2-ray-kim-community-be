@@ -2,6 +2,8 @@ package jinviz.share_depot_be.service;
 
 import jinviz.share_depot_be.dto.UserDTOs;
 import jinviz.share_depot_be.entity.User;
+import jinviz.share_depot_be.exception.CustomException;
+import jinviz.share_depot_be.exception.ErrorCode;
 import jinviz.share_depot_be.repository.UserRepository;
 import jinviz.share_depot_be.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
