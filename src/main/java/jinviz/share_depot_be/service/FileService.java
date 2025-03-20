@@ -3,7 +3,6 @@ package jinviz.share_depot_be.service;
 import jinviz.share_depot_be.dto.FileDTO;
 import jinviz.share_depot_be.exception.CustomException;
 import jinviz.share_depot_be.exception.ErrorCode;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -20,7 +19,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class FileService {
 
     @Value("${file.upload.directory}")
