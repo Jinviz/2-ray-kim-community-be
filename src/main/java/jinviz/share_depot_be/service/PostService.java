@@ -70,29 +70,6 @@ public class PostService {
     }
 
     /**
-     * 게시글 검색 (제목, 내용)
-     * @param keyword 검색 키워드
-     * @param pageable 페이징 정보
-     * @return 게시글 목록 응답 DTO
-     */
-    @Transactional(readOnly = true)
-    public PostDTOs.PostListResponse searchPosts(String keyword, Pageable pageable) {
-        Page<Post> postsPage = postRepository.findByTitleContainingOrContentContaining(
-                keyword, keyword, pageable);
-
-        List<PostDTOs.PostSummaryResponse> postSummaries = postsPage.getContent().stream()
-                .map(PostDTOs.PostSummaryResponse::fromEntity)
-                .collect(Collectors.toList());
-
-        return PostDTOs.PostListResponse.builder()
-                .posts(postSummaries)
-                .totalCount((int) postsPage.getTotalElements())
-                .totalPages(postsPage.getTotalPages())
-                .currentPage(pageable.getPageNumber() + 1)
-                .build();
-    }
-
-    /**
      * 게시글 상세 조회
      * @param postId 게시글 ID
      * @return 게시글 상세 응답 DTO
@@ -181,30 +158,5 @@ public class PostService {
 
         // 게시글 삭제
         postRepository.delete(post);
-    }
-
-    /**
-     * 사용자별 게시글 목록 조회
-     * @param userId 사용자 ID
-     * @param pageable 페이징 정보
-     * @return 게시글 목록 응답 DTO
-     */
-    @Transactional(readOnly = true)
-    public PostDTOs.PostListResponse getUserPosts(Integer userId, Pageable pageable) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-        Page<Post> postsPage = postRepository.findByUser(user, pageable);
-
-        List<PostDTOs.PostSummaryResponse> postSummaries = postsPage.getContent().stream()
-                .map(PostDTOs.PostSummaryResponse::fromEntity)
-                .collect(Collectors.toList());
-
-        return PostDTOs.PostListResponse.builder()
-                .posts(postSummaries)
-                .totalCount((int) postsPage.getTotalElements())
-                .totalPages(postsPage.getTotalPages())
-                .currentPage(pageable.getPageNumber() + 1)
-                .build();
     }
 }

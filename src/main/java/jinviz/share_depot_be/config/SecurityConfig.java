@@ -4,7 +4,6 @@ import jinviz.share_depot_be.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,7 +45,7 @@ public class SecurityConfig {
                         // 정적 리소스 접근 허용
                         .requestMatchers("/uploads/**").permitAll()
                         // 게시글 조회는 모두 허용
-                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         // 그 외 모든 요청은 인증 필요
                         .anyRequest().authenticated())
                 // JWT 필터 추가

@@ -51,23 +51,6 @@ public class PostController {
     }
 
     /**
-     * 게시글 검색 API
-     * @param keyword 검색 키워드
-     * @param page 페이지 번호 (0부터 시작)
-     * @param size 페이지 크기
-     * @return 게시글 목록 응답 DTO
-     */
-    @GetMapping("/search")
-    public ResponseEntity<ApiResponse<PostDTOs.PostListResponse>> searchPosts(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        PostDTOs.PostListResponse posts = postService.searchPosts(keyword, pageable);
-        return ResponseEntity.ok(ApiResponse.success(posts));
-    }
-
-    /**
      * 게시글 상세 조회 API
      * @param postId 게시글 ID
      * @return 게시글 상세 응답 DTO
@@ -120,22 +103,5 @@ public class PostController {
             @AuthenticationPrincipal UserDetails userDetails) {
         postService.deletePost(postId, userDetails.getUsername());
         return ResponseEntity.ok(ApiResponse.success(null, "post_deleted"));
-    }
-
-    /**
-     * 사용자별 게시글 목록 조회 API
-     * @param userId 사용자 ID
-     * @param page 페이지 번호 (0부터 시작)
-     * @param size 페이지 크기
-     * @return 게시글 목록 응답 DTO
-     */
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<ApiResponse<PostDTOs.PostListResponse>> getUserPosts(
-            @PathVariable Integer userId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        PostDTOs.PostListResponse posts = postService.getUserPosts(userId, pageable);
-        return ResponseEntity.ok(ApiResponse.success(posts));
     }
 }
