@@ -19,22 +19,10 @@ public class UserController {
 
     /**
      * 사용자 정보 조회 API
-     * @param userId 사용자 ID
      * @return 사용자 정보 응답 DTO
      */
-    @GetMapping("/{userId}")
-    public ResponseEntity<ApiResponse<UserDTOs.UserInfoResponse>> getUserInfo(@PathVariable Integer userId) {
-        UserDTOs.UserInfoResponse userInfo = userService.getUserInfo(userId);
-        return ResponseEntity.ok(ApiResponse.success(userInfo));
-    }
-
-    /**
-     * 현재 로그인한 사용자 정보 조회 API
-     * @param userDetails 인증된 사용자 정보
-     * @return 사용자 정보 응답 DTO
-     */
-    @GetMapping("/me")
-    public ResponseEntity<ApiResponse<UserDTOs.UserInfoResponse>> getMyInfo(@AuthenticationPrincipal UserDetails userDetails) {
+    @GetMapping("")
+    public ResponseEntity<ApiResponse<UserDTOs.UserInfoResponse>> getUser(@AuthenticationPrincipal UserDetails userDetails) {
         UserDTOs.UserInfoResponse userInfo = userService.getMyInfo(userDetails.getUsername());
         return ResponseEntity.ok(ApiResponse.success(userInfo));
     }
@@ -45,7 +33,7 @@ public class UserController {
      * @param request 사용자 정보 수정 요청 DTO
      * @return 수정된 사용자 정보 응답 DTO
      */
-    @PutMapping("/me")
+    @PutMapping("")
     public ResponseEntity<ApiResponse<UserDTOs.UserInfoResponse>> updateUserInfo(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody UserDTOs.UserUpdateRequest request) {
@@ -59,7 +47,7 @@ public class UserController {
      * @param request 비밀번호 변경 요청 DTO
      * @return 응답 메시지
      */
-    @PutMapping("/me/password")
+    @PutMapping("/password")
     public ResponseEntity<ApiResponse<Void>> changePassword(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody UserDTOs.PasswordChangeRequest request) {
@@ -69,10 +57,9 @@ public class UserController {
 
     /**
      * 회원 탈퇴 API
-     * @param userDetails 인증된 사용자 정보
      * @return 응답 메시지
      */
-    @DeleteMapping("/me")
+    @DeleteMapping("")
     public ResponseEntity<ApiResponse<Void>> withdrawUser(@AuthenticationPrincipal UserDetails userDetails) {
         userService.withdrawUser(userDetails.getUsername());
         return ResponseEntity.ok(ApiResponse.success(null, "user_deleted"));

@@ -23,7 +23,7 @@ public class AuthController {
      * @param request 회원가입 요청 DTO
      * @return 사용자 ID
      */
-    @PostMapping("/signup")
+    @PostMapping("")
     public ResponseEntity<ApiResponse<Integer>> signup(@Valid @RequestBody UserDTOs.SignupRequest request) {
         Integer userId = authService.signup(request);
         return ResponseEntity.ok(ApiResponse.success(userId, "register_success"));
