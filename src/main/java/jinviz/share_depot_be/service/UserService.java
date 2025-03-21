@@ -24,19 +24,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     /**
-     * 사용자 정보 조회
-     * @param userId 사용자 ID
-     * @return 사용자 정보 응답 DTO
-     */
-    @Transactional(readOnly = true)
-    public UserDTOs.UserInfoResponse getUserInfo(Integer userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-        return UserDTOs.UserInfoResponse.fromEntity(user);
-    }
-
-    /**
      * 현재 로그인한 사용자 정보 조회
      * @param email 이메일
      * @return 사용자 정보 응답 DTO
