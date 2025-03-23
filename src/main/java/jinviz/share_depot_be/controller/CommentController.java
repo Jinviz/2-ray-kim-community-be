@@ -30,7 +30,7 @@ public class CommentController {
      * @param request 댓글 생성 요청 DTO
      * @return 생성된 댓글 응답 DTO
      */
-    @PostMapping("/posts/{postId}")
+    @PostMapping("/{postId}")
     public ResponseEntity<ApiResponse<CommentDTOs.CommentResponse>> createComment(
             @PathVariable Integer postId,
             @AuthenticationPrincipal UserDetails userDetails,
@@ -44,7 +44,7 @@ public class CommentController {
      * @param postId 게시글 ID
      * @return 댓글 응답 DTO 목록
      */
-    @GetMapping("/posts/{postId}")
+    @GetMapping("/{postId}")
     public ResponseEntity<ApiResponse<List<CommentDTOs.CommentResponse>>> getCommentsByPost(@PathVariable Integer postId) {
         List<CommentDTOs.CommentResponse> comments = commentService.getCommentsByPost(postId);
         return ResponseEntity.ok(ApiResponse.success(comments));
