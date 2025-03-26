@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +72,7 @@ public class PostDTOs {
         private int likes;
         private int comments;
         private int views;
+        private String thumbnailImage; // 썸네일 이미지 필드 추가
 
         // Entity에서 DTO로 변환하는 정적 메서드
         public static PostSummaryResponse fromEntity(Post post) {
@@ -84,6 +84,7 @@ public class PostDTOs {
                     .likes(post.getLikeCount())
                     .comments(post.getCommentCount())
                     .views(post.getViews())
+                    .thumbnailImage(post.getThumbnailImage()) // 썸네일 이미지 정보 추가
                     .build();
         }
     }
@@ -102,6 +103,7 @@ public class PostDTOs {
         private int likes;
         private int comments;
         private int views;
+        private String thumbnailImage; // 썸네일 이미지 필드 추가
         private List<CommentDTOs.CommentResponse> commentsData;
 
         // Entity에서 DTO로 변환하는 정적 메서드
@@ -119,6 +121,7 @@ public class PostDTOs {
                     .likes(post.getLikeCount())
                     .comments(post.getCommentCount())
                     .views(post.getViews())
+                    .thumbnailImage(post.getThumbnailImage()) // 썸네일 이미지 정보 추가
                     .commentsData(commentResponses)
                     .build();
         }

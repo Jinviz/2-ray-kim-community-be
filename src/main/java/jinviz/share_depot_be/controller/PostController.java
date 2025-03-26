@@ -28,9 +28,9 @@ public class PostController {
      */
     @GetMapping
     public ResponseEntity<ApiResponse<PostDTOs.PostListResponse>> getPosts(
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(page -1, size, Sort.by("createdAt").descending());
         PostDTOs.PostListResponse posts = postService.getPosts(pageable);
         return ResponseEntity.ok(ApiResponse.success(posts));
     }

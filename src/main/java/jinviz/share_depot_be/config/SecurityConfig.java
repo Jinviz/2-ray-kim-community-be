@@ -43,7 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
 
                         // 정적 리소스 접근 허용
-                        .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/api/files/**").permitAll()
+                        .requestMatchers("/uploads/**", "/*.jpg", "/*.png", "/*.gif", "/*.jpeg").permitAll()
                         // 게시글 조회는 모두 허용
 //                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         // 그 외 모든 요청은 인증 필요

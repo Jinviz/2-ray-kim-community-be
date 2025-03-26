@@ -53,8 +53,8 @@ public class FileService {
             Path targetLocation = uploadPath.resolve(storedFilename);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            // 파일 접근 URL 생성
-            String fileUrl = String.format("/%s/%s/%s", uploadDir, subDirectory, storedFilename);
+            // 파일 접근 URL 생성 - 변경된 부분
+            String fileUrl = String.format("/api/files/%s/%s", subDirectory, storedFilename);
 
             // 파일 정보 DTO 반환
             return FileDTO.builder()
